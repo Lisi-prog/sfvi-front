@@ -5,6 +5,8 @@ import SwitchDarkMode from './SwitchDarkMode';
 import SelectLanguage from './SelectLanguage';
 import { Ejemplo } from './views/Ejemplo';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import TemporalDrawer from './components/TemporalDrawer';
+import Layout from './components/Layout';
 
 function App() {
   console.log(window.ipcRenderer);
@@ -47,10 +49,13 @@ function App() {
     <div className="flex flex-col">
       {window.Main && (
         <div className="flex-none">
-          <AppBar />
+          {/* <AppBar /> */}
+          <Layout></Layout>
         </div>
       )}
+      
       <BrowserRouter>
+      
         <Routes>
           <Route path='/'>
           <Route path='/' element={<Ejemplo />} />

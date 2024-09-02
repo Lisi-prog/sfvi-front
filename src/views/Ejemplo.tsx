@@ -13,7 +13,6 @@ return (
 				</Typography>
 			</CardContent>
 		</Card>
-		<MenuInferior></MenuInferior>
 	</Box>
 );
 };

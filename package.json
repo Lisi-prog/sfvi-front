@@ -37,6 +37,7 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@material-tailwind/react": "^2.1.9",
+    "@mui/icons-material": "^6.0.0",
     "@mui/material": "^5.16.7",
     "@vitejs/plugin-react": "^1.2.0",
     "electron-is-dev": "^2.0.0",
