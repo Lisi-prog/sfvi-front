@@ -1,38 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import AppBar from './AppBar';
-import SwitchDarkMode from './SwitchDarkMode';
-import SelectLanguage from './SelectLanguage';
-import { Ejemplo } from './views/Ejemplo';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import TemporalDrawer from './components/TemporalDrawer';
 import Layout from './components/Layout';
+import { Box } from '@mui/material';
+import { CameraConfiguration } from './views/CameraConfiguration';
+import { GeneralConfiguration } from './views/GeneralConfiguration';
+import { SelectProgram } from './views/SelectProgram';
+import { PerformingInterface } from './views/PerformingInterface';
+import { Counters } from './views/Counters';
+import { MonitorMain } from './views/MonitorMain';
 
 function App() {
   console.log(window.ipcRenderer);
-
+  window.Main.on('Start', ()=>{
+    window.Main.Maximize();
+  });
   const [isOpen, setOpen] = useState(false);
   const [isSent, setSent] = useState(false);
   const [fromMain, setFromMain] = useState<string | null>(null);
   const { t } = useTranslation();
-
-  const handleToggle = () => {
-    if (isOpen) {
-      setOpen(false);
-      setSent(false);
-    } else {
-      setOpen(true);
-      setFromMain(null);
-    }
-  };
-  const sendMessageToElectron = () => {
-    if (window.Main) {
-      window.Main.sendMessage(t('common.helloElectron'));
-    } else {
-      setFromMain(t('common.helloBrowser'));
-    }
-    setSent(true);
-  };
 
   useEffect(() => {
     window.Main.removeLoading();
@@ -53,17 +39,22 @@ function App() {
           <Layout></Layout>
         </div>
       )}
-      
-      <BrowserRouter>
-      
-        <Routes>
-          <Route path='/'>
-          <Route path='/' element={<Ejemplo />} />
+      <Box sx={{width: '84vw', alignSelf: 'flex-end', margin: 1}}>
+        <BrowserRouter>
 
+        <Routes>
+          <Route path='/' element={<MonitorMain imgUrl='fetch'/>}>
+          <Route path='/GeneralConfiguration' element={<GeneralConfiguration/>} />
+          <Route path='/CameraConfiguration' element={<CameraConfiguration />} />
+          <Route path='/SelectProgram' element={<SelectProgram />} />
+          <Route path='/Counters' element={<Counters />} />
+          <Route path='/PerformingInterface' element={<PerformingInterface />} />
           </Route>
                 
         </Routes>
       </BrowserRouter>
+      </Box>
+      
     </div>
   );
 }

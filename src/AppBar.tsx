@@ -4,7 +4,7 @@ import Icon from './assets/icons/Icon-Electron.png';
 
 function AppBar() {
   const [isMaximize, setMaximize] = useState(false);
-
+  
   const handleToggle = () => {
     if (isMaximize) {
       setMaximize(false);

@@ -25,6 +25,7 @@ export default function TemporalDrawer() {
   const [openArmado, setOpenArmado] = React.useState(false);
   const [openMecanica, setOpenMecanica] = React.useState(false);
   const [openInyeccion, setOpenInyeccion] = React.useState(false);
+
   const handleClickArmado = () => {
     setOpenArmado(!openArmado);
   };
@@ -44,35 +45,35 @@ export default function TemporalDrawer() {
       </List>
       <List>
       <Divider></Divider>
-        <ListItemButton onClick={handleClickArmado}>
+        <ListItemButton onClick={handleClickArmado} href='/GeneralConfiguration'>
           <ListItemIcon>
             <Settings />
           </ListItemIcon>
           <ListItemText primary="General Configuration" />
         </ListItemButton>
         <Divider></Divider>
-        <ListItemButton onClick={handleClickArmado}>
+        <ListItemButton onClick={handleClickArmado} href='/CameraConfiguration'>
           <ListItemIcon>
             <PhotoCamera/>
           </ListItemIcon>
-          <ListItemText primary="Camera Configuration" />
+          <ListItemText primary="Camera Configuration"/>
         </ListItemButton>
         <Divider></Divider>
-        <ListItemButton onClick={handleClickArmado}>
+        <ListItemButton onClick={handleClickArmado} href='/SelectProgram'>
           <ListItemIcon>
             <RestartAlt />
           </ListItemIcon>
           <ListItemText primary="Select Program" />
         </ListItemButton>
         <Divider></Divider>
-        <ListItemButton onClick={handleClickArmado}>
+        <ListItemButton onClick={handleClickArmado} href='/Counters'>
           <ListItemIcon>
             <AvTimer />
           </ListItemIcon>
           <ListItemText primary="Counters" />
         </ListItemButton>
         <Divider></Divider>
-        <ListItemButton onClick={handleClickArmado}>
+        <ListItemButton onClick={handleClickArmado} href='/PerformingInterface'>
           <ListItemIcon>
             <Tv/>
           </ListItemIcon>
