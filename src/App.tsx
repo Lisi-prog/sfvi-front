@@ -41,20 +41,17 @@ function App() {
       )}
       <Box sx={{width: '84vw', alignSelf: 'flex-end', margin: 1}}>
         <BrowserRouter>
-
-        <Routes>
-          <Route path='/' element={<MonitorMain imgUrl='fetch'/>}>
-          <Route path='/GeneralConfiguration' element={<GeneralConfiguration/>} />
-          <Route path='/CameraConfiguration' element={<CameraConfiguration />} />
-          <Route path='/SelectProgram' element={<SelectProgram />} />
-          <Route path='/Counters' element={<Counters />} />
-          <Route path='/PerformingInterface' element={<PerformingInterface />} />
-          </Route>
-                
-        </Routes>
-      </BrowserRouter>
+          <Routes>
+            <Route path='/' element={<MonitorMain imgUrl='fetch'/>}>
+              <Route path='/GeneralConfiguration' element={<GeneralConfiguration/>} />
+              <Route path='/CameraConfiguration' element={<CameraConfiguration />} />
+              <Route path='/SelectProgram' element={<SelectProgram />} />
+              <Route path='/Counters' element={<Counters />} />
+              <Route path='/PerformingInterface' element={<PerformingInterface />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
       </Box>
-      
     </div>
   );
 }
