@@ -6,20 +6,15 @@ import { Box } from '@mui/material';
 import { CameraConfiguration } from './views/CameraConfiguration';
 import { GeneralConfiguration } from './views/GeneralConfiguration';
 import { SelectProgram } from './views/SelectProgram';
-import { PerformingInterface } from './views/PerformingInterface';
+import { ProgrammingInterface } from './views/ProgrammingInterface';
 import { Counters } from './views/Counters';
 import { MonitorMain } from './views/MonitorMain';
-
 function App() {
   console.log(window.ipcRenderer);
-  window.Main.on('Start', ()=>{
-    window.Main.Maximize();
-  });
-  const [isOpen, setOpen] = useState(false);
   const [isSent, setSent] = useState(false);
   const [fromMain, setFromMain] = useState<string | null>(null);
   const { t } = useTranslation();
-
+  
   useEffect(() => {
     window.Main.removeLoading();
   }, []);
@@ -39,16 +34,15 @@ function App() {
           <Layout></Layout>
         </div>
       )}
-      <Box sx={{width: '84vw', alignSelf: 'flex-end', margin: 1}}>
+      <Box sx={{width: '84vw', alignSelf: 'flex-end', mr:1}}>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<MonitorMain imgUrl='fetch'/>}>
+            <Route path='/' element={<MonitorMain imgUrl='fetch'/>} />
               <Route path='/GeneralConfiguration' element={<GeneralConfiguration/>} />
               <Route path='/CameraConfiguration' element={<CameraConfiguration />} />
               <Route path='/SelectProgram' element={<SelectProgram />} />
               <Route path='/Counters' element={<Counters />} />
-              <Route path='/PerformingInterface' element={<PerformingInterface />} />
-            </Route>
+              <Route path='/ProgrammingInterface' element={<ProgrammingInterface />} />
           </Routes>
         </BrowserRouter>
       </Box>
