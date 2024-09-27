@@ -9,6 +9,7 @@ import { SelectProgram } from './views/SelectProgram';
 import { ProgrammingInterface } from './views/ProgrammingInterface';
 import { Counters } from './views/Counters';
 import { MonitorMain } from './views/MonitorMain';
+import { ClasicProgram } from './views/ClasicProgram';
 function App() {
   console.log(window.ipcRenderer);
   const [isSent, setSent] = useState(false);
@@ -43,6 +44,7 @@ function App() {
               <Route path='/SelectProgram' element={<SelectProgram />} />
               <Route path='/Counters' element={<Counters />} />
               <Route path='/ProgrammingInterface' element={<ProgrammingInterface />} />
+              <Route path='/ClasicProgram' element={<ClasicProgram />} />
           </Routes>
         </BrowserRouter>
       </Box>

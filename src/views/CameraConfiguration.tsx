@@ -1,5 +1,6 @@
 import { Box, Button, Card, CardContent, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import AuxiliarDrawer from '../components/AuxiliarDrawer';
 import { MenuInferior } from '../components/MenuInferior';
 const buttonStyle = {
 	width: '20vw', 
@@ -32,6 +33,7 @@ export const CameraConfiguration = () => {
 
 return (
 	<Box>
+		<AuxiliarDrawer></AuxiliarDrawer>
 		<Card sx={{width:'25vw'}}>
 			<CardContent>
 				<Typography variant="h5" component="div" mb={1}>

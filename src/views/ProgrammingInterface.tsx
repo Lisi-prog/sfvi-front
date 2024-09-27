@@ -5,6 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import Editor from "@monaco-editor/react";
+import ProgrammingDrawer from '../components/ProgrammingDrawer';
 
 function generate(element: React.ReactElement<any>) {
 
@@ -28,6 +29,7 @@ const onCodeChange = React.useCallback((val, viewUpdate) => {
 
 return (
 	<Box>
+		<ProgrammingDrawer></ProgrammingDrawer>
 		<Grid container spacing={1}>
 			<Grid item>
 				<Card sx={{width: '35vw', height: '96vh'}}>

@@ -1,11 +1,16 @@
 import { ArrowDownward } from '@mui/icons-material';
 import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Card, CardContent, Divider, Grid, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import MainDrawer from '../components/MainDrawer';
 import { MenuInferior } from '../components/MenuInferior';
 import { CameraConfiguration } from './CameraConfiguration';
 import { GeneralConfiguration } from './GeneralConfiguration';
 const textFieldStyle = {
 	marginBottom: 1,
+}	
+const firstTextFieldStyle = {
+	marginBottom: 1,
+	marginTop: 1,
 }
 export const MonitorMain = ({imgUrl=''}:{imgUrl: string}) => {
 const [acordionExpandido, setAcordionExpandido] = React.useState<string | false>('mainConfig');
@@ -14,6 +19,7 @@ const handleChangeAccordion = (panel: string) => (event: React.SyntheticEvent, n
 											};
 return (
 	<Box>
+		<MainDrawer></MainDrawer>
 		<Grid container spacing={1}>
 			<Grid item>
 				{/* <Card>
@@ -42,10 +48,10 @@ return (
 								{/* </AccordionSummary> */}
 								<Divider></Divider>
 								{/* <AccordionDetails> */}
-									<TextField id="outlined-basic" label="Program Name" variant="outlined" fullWidth size='small' sx={textFieldStyle}/>
-									<TextField id="outlined-basic" label="Status" variant="outlined" fullWidth size='small' sx={textFieldStyle}/>
-									<TextField id="outlined-basic" label="Pictures Taken" variant="outlined" fullWidth size='small' sx={textFieldStyle}/>
-									<TextField id="outlined-basic" label="NOK Pictures" variant="outlined" fullWidth size='small' sx={textFieldStyle}/>
+									<TextField value={""} id="outlined-basic" label="Program Name" variant="outlined" fullWidth size='small' disabled sx={firstTextFieldStyle}/>
+									<TextField value={""} id="outlined-basic" label="Status" variant="outlined" fullWidth size='small' disabled sx={textFieldStyle}/>
+									<TextField value={""} id="outlined-basic" label="Pictures Taken" variant="outlined" fullWidth size='small' disabled sx={textFieldStyle}/>
+									<TextField value={""} id="outlined-basic" label="NOK Pictures" variant="outlined" fullWidth size='small' disabled sx={textFieldStyle}/>
 									<Button variant='contained' fullWidth>
 										Test Trigger
 									</Button>

@@ -11,7 +11,7 @@ export default function Layout() {
   return(
     <Box>
       <AppBar/>
-      <TemporalDrawer></TemporalDrawer>
+      {/* <TemporalDrawer></TemporalDrawer> */}
     </Box>
   );
 };
