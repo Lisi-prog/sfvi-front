@@ -24,9 +24,13 @@ const [imgUrl, setImgUrl] = React.useState<string>('');
 
 const [urlSolicitada, setUrlSolicitada] = React.useState("");
 
+
+
 function test() {
+	console.log("asdasdasdasda")
+	console.log(`${import.meta.env.VITE_HTTP_URL}:${import.meta.env.VITE_HTTP_PORT}/test/${urlSolicitada}`)
 	axios
-		.post(`${import.meta.env.HTTP_URL}:${import.meta.env.HTTP_PORT}/test/${urlSolicitada}`, dataExample, 
+		.post(`${import.meta.env.VITE_HTTP_URL}:${import.meta.env.VITE_HTTP_PORT}/test/${urlSolicitada}`, dataExample, 
 		{
 			headers: {
 				Accept: 'application/json',
@@ -80,7 +84,7 @@ return (
 										Test Trigger
 									</Button>
 
-									<TextField value={""} id="outlined-basic" label="URL" variant="outlined" fullWidth size='small' sx={textFieldStyle} onChange={(event) => setUrlSolicitada(event.target.value)}/>
+									<TextField value={urlSolicitada} id="outlined-basic" label="URL" variant="outlined" fullWidth size='small' sx={textFieldStyle} onChange={(event) => setUrlSolicitada(event.target.value)}/>
 									<Button variant='contained' fullWidth onClick={test}>TEST IMAGE</Button>
 								{/* </AccordionDetails>
 							</Accordion> */}

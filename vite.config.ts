@@ -56,6 +56,7 @@ export default ({ command }: ConfigEnv): UserConfig => {
     return {
       root: srcRoot,
       base: '/',
+      envDir: root,
       plugins: plugins(true),
       resolve: {
         alias: {
