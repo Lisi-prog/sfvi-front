@@ -26,7 +26,13 @@ const [urlSolicitada, setUrlSolicitada] = React.useState("");
 
 function test() {
 	axios
-		.post(`${import.meta.env.HTTP_URL}:${import.meta.env.HTTP_PORT}/test/${urlSolicitada}`, dataExample)
+		.post(`${import.meta.env.HTTP_URL}:${import.meta.env.HTTP_PORT}/test/${urlSolicitada}`, dataExample, 
+		{
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json;charset=UTF-8',
+			},}
+		)
 		.then(response => {
 				setImgUrl(response.data);
 		})
