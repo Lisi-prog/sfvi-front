@@ -1,8 +1,10 @@
-import { Box, Button, Collapse, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, styled } from "@mui/material";
+import { Box, Button, Collapse, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Modal, styled } from "@mui/material";
 import React, { useRef } from "react";
 import { AvTimer, MonitorHeart, PhotoCamera, RestartAlt, Settings, Tv } from "@mui/icons-material";
 import logoUrl from '../assets/zero-logo.png'
 import { start } from "repl";
+import { GeneralConfiguration } from "../views/GeneralConfiguration";
+import { CameraConfiguration } from "../views/CameraConfiguration";
 
 declare global {
   interface Window {
@@ -36,17 +38,20 @@ async function abrirSelectorDeArchivos() {
 
 
 export default function MainDrawer() {
-  const [openArmado, setOpenArmado] = React.useState(false);
-  const [openMecanica, setOpenMecanica] = React.useState(false);
-  const [openInyeccion, setOpenInyeccion] = React.useState(false);
   const inputFile = useRef<HTMLInputElement | null>(null);
-  
+  const [openGeneralConfig, setOpenGeneralConfig] = React.useState(false);
+  const handleOpenGeneralConfig = () => setOpenGeneralConfig(true);
+  const handleCloseGeneralConfig = () => setOpenGeneralConfig(false);
+  const [openCameraConfig, setOpenCameraConfig] = React.useState(false);
+  const handleOpenCameraConfig = () => setOpenCameraConfig(true);
+  const handleCloseCameraConfig = () => setOpenCameraConfig(false);
   const onOpenFileClick = () => {
     // if (inputFile.current){
     //   inputFile.current.click();
     // }
     abrirSelectorDeArchivos()
   };
+  
 
   const DrawerList = (
     <Box sx={{ width: '15vw' }} role="presentation">
@@ -56,19 +61,67 @@ export default function MainDrawer() {
         </ListItem>
       </List> */}
       <List sx={{height: '100vh'}}>
-        <ListItemButton  href='/GeneralConfiguration'>
+        <ListItemButton  onClick={handleOpenGeneralConfig}>
           <ListItemIcon>
             <Settings />
           </ListItemIcon>
           <ListItemText primary="General Configuration" />
         </ListItemButton>
+        <Dialog
+          open={openGeneralConfig}
+          onClose={handleCloseGeneralConfig}
+          PaperProps={{
+            component: 'form',
+            onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
+              event.preventDefault();
+              const formData = new FormData(event.currentTarget);
+              const formJson = Object.fromEntries((formData as any).entries());
+              const email = formJson.email;
+              console.log(email);
+              handleCloseGeneralConfig();
+            },
+          }}
+        >
+          {/* <DialogTitle>General Configuration</DialogTitle> */}
+          <DialogContent>
+            <GeneralConfiguration/>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseGeneralConfig} variant="contained" color="error">Cancel</Button>
+            <Button type="submit" variant="contained" >Accept</Button>
+          </DialogActions>
+        </Dialog>
         <Divider></Divider>
-        <ListItemButton  href='/CameraConfiguration'>
+        <ListItemButton onClick={handleOpenCameraConfig}>
           <ListItemIcon>
             <PhotoCamera/>
           </ListItemIcon>
           <ListItemText primary="Camera Configuration"/>
         </ListItemButton>
+        <Dialog
+          open={openCameraConfig}
+          onClose={handleCloseCameraConfig}
+          PaperProps={{
+            component: 'form',
+            onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
+              event.preventDefault();
+              const formData = new FormData(event.currentTarget);
+              const formJson = Object.fromEntries((formData as any).entries());
+              const email = formJson.email;
+              console.log(email);
+              handleCloseCameraConfig();
+            },
+          }}
+        >
+          {/* <DialogTitle>General Configuration</DialogTitle> */}
+          <DialogContent>
+            <CameraConfiguration/>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseCameraConfig} variant="contained" color="error">Cancel</Button>
+            <Button type="submit" variant="contained" >Accept</Button>
+          </DialogActions>
+        </Dialog>
         <Divider></Divider>
           
         <ListItemButton onClick={onOpenFileClick}>

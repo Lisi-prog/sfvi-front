@@ -1,5 +1,6 @@
 import { ArrowDownward } from '@mui/icons-material';
 import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Card, CardContent, Divider, Grid, TextField, Typography } from '@mui/material';
+import axios, {isCancel, AxiosError} from 'axios';
 import React, { useEffect, useState } from 'react';
 import MainDrawer from '../components/MainDrawer';
 import { MenuInferior } from '../components/MenuInferior';
@@ -12,11 +13,23 @@ const firstTextFieldStyle = {
 	marginBottom: 1,
 	marginTop: 1,
 }
-export const MonitorMain = ({imgUrl=''}:{imgUrl: string}) => {
+export const MonitorMain = () => {
 const [acordionExpandido, setAcordionExpandido] = React.useState<string | false>('mainConfig');
-const handleChangeAccordion = (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
-												setAcordionExpandido(newExpanded ? panel : false);
-											};
+const [imgUrl, setImgUrl] = React.useState<string>('');
+
+const [urlSolicitada, setUrlSolicitada] = React.useState("");
+
+function test() {
+	axios
+		.get(`${import.meta.env.HTTP_URL}:${import.meta.env.HTTP_PORT}/test/${urlSolicitada}`)
+		.then(response => {
+				setImgUrl(response.data);
+		})
+		.catch(function(error) {
+				// manipulate the error response here
+		});
+	}
+
 return (
 	<Box>
 		<MainDrawer></MainDrawer>
@@ -52,9 +65,12 @@ return (
 									<TextField value={""} id="outlined-basic" label="Status" variant="outlined" fullWidth size='small' disabled sx={textFieldStyle}/>
 									<TextField value={""} id="outlined-basic" label="Pictures Taken" variant="outlined" fullWidth size='small' disabled sx={textFieldStyle}/>
 									<TextField value={""} id="outlined-basic" label="NOK Pictures" variant="outlined" fullWidth size='small' disabled sx={textFieldStyle}/>
-									<Button variant='contained' fullWidth>
+									<Button variant='contained' fullWidth href={`${import.meta.env.HTTP_URL}:${import.meta.env.HTTP_PORT}/test`}>
 										Test Trigger
 									</Button>
+
+									<TextField value={""} id="outlined-basic" label="URL" variant="outlined" fullWidth size='small' sx={textFieldStyle} onChange={(event) => setUrlSolicitada(event.target.value)}/>
+									<Button variant='contained' fullWidth onClick={test}>TEST IMAGE</Button>
 								{/* </AccordionDetails>
 							</Accordion> */}
 							{/* <Accordion disableGutters expanded={acordionExpandido === 'generalConfig'} onChange={handleChangeAccordion('generalConfig')} >

@@ -13,6 +13,19 @@ const selectorStyle = {
 	mb: 1,
 	ml:2.5
 }
+
+const ModalStyle = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  //width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 export const GeneralConfiguration = () => {
 const [age, setAge] = React.useState('');
 const [triggerPin, setTriggerPin] = React.useState('');
@@ -41,8 +54,8 @@ const handleChangeNoOkPin = (event: SelectChangeEvent) => {
 	setNoOkPin(event.target.value as string);
 };
 return (
-	<Box >
-		<AuxiliarDrawer></AuxiliarDrawer>
+	<Box>
+		{/* <AuxiliarDrawer></AuxiliarDrawer> */}
 		<Card sx={{width:'25vw'}}>
 			<CardContent sx={{justifyContent:'center', alignContent:'center'}}>
 				<Typography variant="h5" component="div" mb={1}>
