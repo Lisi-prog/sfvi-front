@@ -13,6 +13,11 @@ const firstTextFieldStyle = {
 	marginBottom: 1,
 	marginTop: 1,
 }
+const dataExample = {
+  title: 'Hello World',
+  body: 'This is a test post.',
+  userId: 1,
+};
 export const MonitorMain = () => {
 const [acordionExpandido, setAcordionExpandido] = React.useState<string | false>('mainConfig');
 const [imgUrl, setImgUrl] = React.useState<string>('');
@@ -21,12 +26,12 @@ const [urlSolicitada, setUrlSolicitada] = React.useState("");
 
 function test() {
 	axios
-		.get(`${import.meta.env.HTTP_URL}:${import.meta.env.HTTP_PORT}/test/${urlSolicitada}`)
+		.post(`${import.meta.env.HTTP_URL}:${import.meta.env.HTTP_PORT}/test/${urlSolicitada}`, dataExample)
 		.then(response => {
 				setImgUrl(response.data);
 		})
 		.catch(function(error) {
-				// manipulate the error response here
+				console.log(`Error, ${error}`);
 		});
 	}
 
@@ -65,7 +70,7 @@ return (
 									<TextField value={""} id="outlined-basic" label="Status" variant="outlined" fullWidth size='small' disabled sx={textFieldStyle}/>
 									<TextField value={""} id="outlined-basic" label="Pictures Taken" variant="outlined" fullWidth size='small' disabled sx={textFieldStyle}/>
 									<TextField value={""} id="outlined-basic" label="NOK Pictures" variant="outlined" fullWidth size='small' disabled sx={textFieldStyle}/>
-									<Button variant='contained' fullWidth href={`${import.meta.env.HTTP_URL}:${import.meta.env.HTTP_PORT}/test`}>
+									<Button variant='contained' fullWidth>
 										Test Trigger
 									</Button>
 
