@@ -5,6 +5,7 @@ import logoUrl from '../assets/zero-logo.png'
 import { start } from "repl";
 import { GeneralConfiguration } from "../views/GeneralConfiguration";
 import { CameraConfiguration } from "../views/CameraConfiguration";
+import Test from "../components/Test";
 
 declare global {
   interface Window {
@@ -34,6 +35,7 @@ async function abrirSelectorDeArchivos() {
   const [fileHandle] = await window.showOpenFilePicker({startIn:'documents'});
   const file = await fileHandle.getFile();
   const contents = await file.text();
+  // console.log(document.getElementById("file-opener").files[0])
 }
 
 
@@ -126,12 +128,13 @@ export default function MainDrawer() {
         <Divider></Divider>
           
         <ListItemButton onClick={onOpenFileClick}>
-          <input type='file' id='file-opener' ref={inputFile} style={{display: 'none'}}/>
+          <input type='file' id='file-opener' ref={inputFile} style={{display: 'none'}} onChange={(event) => console.log('hola')}/>
           <ListItemIcon>
             <RestartAlt />
           </ListItemIcon>
           <ListItemText primary="Select Program" />
         </ListItemButton>
+          <Test/>
         <Divider></Divider>
         <ListItemButton  href='/Counters'>
           <ListItemIcon>

@@ -17,8 +17,9 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "outDir": "../dist-electron"
+    "outDir": "../dist-electron",
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   },
   "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js"]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "src"]
 }
