@@ -49,6 +49,7 @@ export default function MainDrawer() {
     // if (inputFile.current){
     //   inputFile.current.click();
     // }
+    
     abrirSelectorDeArchivos()
   };
   

@@ -27,7 +27,6 @@ const [urlSolicitada, setUrlSolicitada] = React.useState("");
 
 
 function test() {
-	console.log("asdasdasdasda")
 	console.log(`${import.meta.env.VITE_HTTP_URL}:${import.meta.env.VITE_HTTP_PORT}/test/${urlSolicitada}`)
 	axios
 		.post(`${import.meta.env.VITE_HTTP_URL}:${import.meta.env.VITE_HTTP_PORT}/test/${urlSolicitada}`, dataExample, 
@@ -41,7 +40,7 @@ function test() {
 				setImgUrl(response.data);
 		})
 		.catch(function(error) {
-				console.log(`Error, ${error}`);
+				console.log(`Error: ${error}`);
 		});
 	}
 
@@ -86,35 +85,6 @@ return (
 
 									<TextField value={urlSolicitada} id="outlined-basic" label="URL" variant="outlined" fullWidth size='small' sx={textFieldStyle} onChange={(event) => setUrlSolicitada(event.target.value)}/>
 									<Button variant='contained' fullWidth onClick={test}>TEST IMAGE</Button>
-								{/* </AccordionDetails>
-							</Accordion> */}
-							{/* <Accordion disableGutters expanded={acordionExpandido === 'generalConfig'} onChange={handleChangeAccordion('generalConfig')} >
-								<AccordionSummary
-									expandIcon={<ArrowDownward/>}
-									aria-controls="general-config-panel"
-									id="general-config"
-								>
-									<Typography>General Configuration</Typography>
-								</AccordionSummary>
-								<Divider></Divider>
-								<AccordionDetails>
-									
-									<GeneralConfiguration/>
-								</AccordionDetails>
-							</Accordion>
-							<Accordion disableGutters expanded={acordionExpandido === 'cameraConfig'} onChange={handleChangeAccordion('cameraConfig')}>
-								<AccordionSummary
-									expandIcon={<ArrowDownward/>}
-									aria-controls="camera-config-panel"
-									id="camera-config"
-								>
-									<Typography>Camera Configuration</Typography>
-								</AccordionSummary>
-								<Divider></Divider>
-								<AccordionDetails>
-									<CameraConfiguration/>
-								</AccordionDetails>
-							</Accordion> */}
 					</CardContent>
 				</Card>
 			</Grid>
