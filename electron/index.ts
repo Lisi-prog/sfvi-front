@@ -2,7 +2,7 @@
 import { join } from 'path';
 
 // Packages
-import { BrowserWindow, app, ipcMain, IpcMainEvent, nativeTheme } from 'electron';
+import { BrowserWindow, app, ipcMain, IpcMainEvent, nativeTheme, dialog } from 'electron';
 import isDev from 'electron-is-dev';
 
 const height = 600;
@@ -48,6 +48,10 @@ function createWindow() {
 
   ipcMain.on('close', () => {
     window.close();
+  });
+
+  ipcMain.on('get-file-path', (event, filePath) => {
+    event.returnValue = filePath;
   });
 
   nativeTheme.themeSource = 'dark';

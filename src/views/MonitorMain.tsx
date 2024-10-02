@@ -1,6 +1,6 @@
 import { ArrowDownward } from '@mui/icons-material';
 import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Card, CardContent, Divider, Grid, TextField, Typography } from '@mui/material';
-import axios, {isCancel, AxiosError} from 'axios';
+import axios, {isCancel, AxiosError, AxiosResponse} from 'axios';
 import React, { useEffect, useState } from 'react';
 import MainDrawer from '../components/MainDrawer';
 import { MenuInferior } from '../components/MenuInferior';
@@ -26,8 +26,7 @@ const [urlSolicitada, setUrlSolicitada] = React.useState("");
 
 
 
-function test() {
-	console.log("asdasdasdasda")
+function test2() {
 	console.log(`${import.meta.env.VITE_HTTP_URL}:${import.meta.env.VITE_HTTP_PORT}/test/${urlSolicitada}`)
 	axios
 		.post(`${import.meta.env.VITE_HTTP_URL}:${import.meta.env.VITE_HTTP_PORT}/test/${urlSolicitada}`, dataExample, 
@@ -43,6 +42,18 @@ function test() {
 		.catch(function(error) {
 				console.log(`Error, ${error}`);
 		});
+	}
+
+	function test(){
+		axios.post<Blob>(`${import.meta.env.VITE_HTTP_URL}:${import.meta.env.VITE_HTTP_PORT}/test`, dataExample, { responseType: 'blob' })
+			.then((response: AxiosResponse<Blob>) => {
+				const url = URL.createObjectURL(response.data);
+				console.log(response)
+				setImgUrl(url);
+			})
+			.catch(error => {
+				console.error('Error al cargar la imagen:', error);
+			});
 	}
 
 return (

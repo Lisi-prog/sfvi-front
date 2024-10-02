@@ -189,3 +189,7 @@ const api = {
 };
 
 contextBridge.exposeInMainWorld('Main', api);
+
+contextBridge.exposeInMainWorld('electron', {
+  getFilePath: (file: File) => ipcRenderer.sendSync('get-file-path', file.path),
+});
