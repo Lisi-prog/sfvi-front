@@ -5,7 +5,7 @@ import logoUrl from '../assets/zero-logo.png'
 import { start } from "repl";
 import { GeneralConfiguration } from "../views/GeneralConfiguration";
 import { CameraConfiguration } from "../views/CameraConfiguration";
-import Test from "../components/Test";
+import InputSelectProgram from "./InputSelectProgram";
 
 declare global {
   interface Window {
@@ -32,29 +32,25 @@ const ListItemButtonStyle = {
 }
 
 async function abrirSelectorDeArchivos() {
-  const [fileHandle] = await window.showOpenFilePicker({startIn:'documents'});
-  const file = await fileHandle.getFile();
-  const contents = await file.text();
+  // const [fileHandle] = await window.showOpenFilePicker({startIn:'documents'});
+  // const file = await fileHandle.getFile();
+  // const contents = await file.text();
   // console.log(document.getElementById("file-opener").files[0])
 }
 
 
 export default function MainDrawer() {
-  const inputFile = useRef<HTMLInputElement | null>(null);
   const [openGeneralConfig, setOpenGeneralConfig] = React.useState(false);
   const handleOpenGeneralConfig = () => setOpenGeneralConfig(true);
   const handleCloseGeneralConfig = () => setOpenGeneralConfig(false);
   const [openCameraConfig, setOpenCameraConfig] = React.useState(false);
   const handleOpenCameraConfig = () => setOpenCameraConfig(true);
   const handleCloseCameraConfig = () => setOpenCameraConfig(false);
+
   const onOpenFileClick = () => {
-    // if (inputFile.current){
-    //   inputFile.current.click();
-    // }
-    
-    abrirSelectorDeArchivos()
+    var x = document.getElementById("file-opener")
+    x?.click()
   };
-  
 
   const DrawerList = (
     <Box sx={{ width: '15vw' }} role="presentation">
@@ -128,13 +124,12 @@ export default function MainDrawer() {
         <Divider></Divider>
           
         <ListItemButton onClick={onOpenFileClick}>
-          <input type='file' id='file-opener' ref={inputFile} style={{display: 'none'}} onChange={(event) => console.log('hola')}/>
           <ListItemIcon>
             <RestartAlt />
           </ListItemIcon>
           <ListItemText primary="Select Program" />
         </ListItemButton>
-          <Test/>
+          <InputSelectProgram/>
         <Divider></Divider>
         <ListItemButton  href='/Counters'>
           <ListItemIcon>

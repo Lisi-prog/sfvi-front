@@ -10,7 +10,7 @@ const FileInput: React.FC = () => {
     }
   };
 
-  return <input type="file" onChange={handleFileChange} />;
+  return <input id="file-opener" type="file" onChange={handleFileChange} style={{ display: 'none' }} />;
 };
 
 export default FileInput;
