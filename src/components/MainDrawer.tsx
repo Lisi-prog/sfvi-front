@@ -57,8 +57,9 @@ export default function MainDrawer() {
   const [openCameraConfig, setOpenCameraConfig] = React.useState(false);
   const handleOpenCameraConfig = () => setOpenCameraConfig(true);
   const handleCloseCameraConfig = () => setOpenCameraConfig(false);
+
   useEffect(() => {
-    sendMessage(JSON.stringify(mensaje))
+    
   }, [])
 
   useEffect(() => {
@@ -98,7 +99,7 @@ export default function MainDrawer() {
 						<img src={imgUrl}/>
 					</CardContent>
 			</Card> */}
-      <ImageViewer filename={filename} content={cont} /> 
+      {/* <ImageViewer filename={filename} content={cont} />  */}
       <List sx={{height: '100vh'}}>
         <ListItemButton  onClick={handleOpenGeneralConfig}>
           <ListItemIcon>
