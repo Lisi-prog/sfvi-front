@@ -6,6 +6,8 @@ import MainDrawer from '../components/MainDrawer';
 import { MenuInferior } from '../components/MenuInferior';
 import { CameraConfiguration } from './CameraConfiguration';
 import { GeneralConfiguration } from './GeneralConfiguration';
+import EventStream from '../components/Test';
+
 const textFieldStyle = {
 	marginBottom: 1,
 }	
@@ -56,18 +58,6 @@ function test2() {
 			});
 	}
 
-	function test(){
-		axios.post<Blob>(`${import.meta.env.VITE_HTTP_URL}:${import.meta.env.VITE_HTTP_PORT}/test`, dataExample, { responseType: 'blob' })
-			.then((response: AxiosResponse<Blob>) => {
-				const url = URL.createObjectURL(response.data);
-				console.log(response)
-				setImgUrl(url);
-			})
-			.catch(error => {
-				console.error('Error al cargar la imagen:', error);
-			});
-	}
-
 return (
 	<Box>
 		<MainDrawer></MainDrawer>
@@ -84,6 +74,7 @@ return (
 					<CardContent>
 						<img src={imgUrl}/>
 					</CardContent>
+					<EventStream/>
 				</Card>
 			</Grid>
 			<Grid item>
