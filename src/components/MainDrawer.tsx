@@ -9,6 +9,7 @@ import InputSelectProgram, { FilePath } from "./InputSelectProgram";
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import ImageViewer from './ImageViewer';
 import { parsearJson } from '../utils/common-util/general-functions';
+import { ImageRouteSelector } from "../views/ImageRouteSelector";
 const mensaje = {
   codigo: 'dameimagen'
 }
@@ -50,16 +51,20 @@ export default function MainDrawer() {
   const { sendMessage, lastMessage, readyState, getWebSocket} = useWebSocket(socketUrl);
   const [openGeneralConfig, setOpenGeneralConfig] = React.useState(false);
   const handleOpenGeneralConfig = () => setOpenGeneralConfig(true);
+
   const handleCloseGeneralConfig = () => {
     setOpenGeneralConfig(false);
-    sendMessage('ping')
   }
+  
   const [openCameraConfig, setOpenCameraConfig] = React.useState(false);
   const handleOpenCameraConfig = () => setOpenCameraConfig(true);
   const handleCloseCameraConfig = () => setOpenCameraConfig(false);
-
+  
+  const [openImageRouteSelector, setOpenImageRouteSelector] = React.useState(false)
+  const handleOpenImageRouteSelector = () => setOpenImageRouteSelector(true);
+  const handleCloseImageRouteSelector = () => setOpenImageRouteSelector(false);
   useEffect(() => {
-    
+    sendMessage('ruta')
   }, [])
 
   useEffect(() => {
@@ -69,9 +74,13 @@ export default function MainDrawer() {
     console.log(jsonAux.filename)
     setFilename(jsonAux.filename)
     setCont(jsonAux.content)
-    // setImgUrl(lastMessage?.data)
-    // console.log(data.filename)
-    // setImgUrl(lastMessage?.data)
+
+    if(jsonAux.codigo === 'dame_ruta_imagen'){
+      //Solicita que le indiquemos la ruta
+      //Se debe abrir el selector de archivos, y detener todo hasta que se resuelva
+      handleOpenImageRouteSelector()
+		}
+
   }, [lastMessage])
   
   const [imgUrl, setImgUrl] = React.useState<string>('');
@@ -128,6 +137,30 @@ export default function MainDrawer() {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleCloseGeneralConfig} variant="contained" color="error">Cancel</Button>
+            <Button type="submit" variant="contained" >Accept</Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          open={openImageRouteSelector}
+          onClose={handleCloseImageRouteSelector}
+          PaperProps={{
+            component: 'form',
+            onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
+              event.preventDefault();
+              const formData = new FormData(event.currentTarget);
+              const formJson = Object.fromEntries((formData as any).entries());
+              const email = formJson.email;
+              console.log(email);
+              handleCloseImageRouteSelector();
+            },
+          }}
+        >
+          {/* <DialogTitle>General Configuration</DialogTitle> */}
+          <DialogContent>
+            <ImageRouteSelector/>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseImageRouteSelector} variant="contained" color="error">Cancel</Button>
             <Button type="submit" variant="contained" >Accept</Button>
           </DialogActions>
         </Dialog>

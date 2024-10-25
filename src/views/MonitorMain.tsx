@@ -39,9 +39,11 @@ const [cont, setCont] = React.useState<number[]>([]);
 
 	useEffect(() => {
 		var jsonAux = parsearJson(lastMessage?.data.toString())
-    console.log(jsonAux.filename)
+    console.log(jsonAux)
     setFilename(jsonAux.filename)
     setCont(jsonAux.content)
+
+		
 	}, [lastMessage])
 	
 
