@@ -1,4 +1,4 @@
-import { Box, Button, Collapse, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Modal, styled } from "@mui/material";
+import { Box, Button, Collapse, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Modal, styled, Card, CardContent, } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { AvTimer, MonitorHeart, PhotoCamera, RestartAlt, Settings, Tv } from "@mui/icons-material";
 import logoUrl from '../assets/zero-logo.png'
@@ -7,7 +7,8 @@ import { GeneralConfiguration } from "../views/GeneralConfiguration";
 import { CameraConfiguration } from "../views/CameraConfiguration";
 import InputSelectProgram, { FilePath } from "./InputSelectProgram";
 import useWebSocket, { ReadyState } from 'react-use-websocket';
-
+import ImageViewer from './ImageViewer';
+import { parsearJson } from '../utils/common-util/general-functions';
 const mensaje = {
   codigo: 'dameimagen'
 }
@@ -59,10 +60,23 @@ export default function MainDrawer() {
   useEffect(() => {
     sendMessage(JSON.stringify(mensaje))
   }, [])
+
   useEffect(() => {
+    // console.log(lastMessage?.data)
     console.log(lastMessage?.data)
+    var jsonAux = parsearJson(lastMessage?.data.toString())
+    console.log(jsonAux.filename)
+    setFilename(jsonAux.filename)
+    setCont(jsonAux.content)
+    // setImgUrl(lastMessage?.data)
+    // console.log(data.filename)
+    // setImgUrl(lastMessage?.data)
   }, [lastMessage])
   
+  const [imgUrl, setImgUrl] = React.useState<string>('');
+  const [filename, setFilename] = React.useState<string>('');
+  const [cont, setCont] = React.useState<number[]>([]);
+
   const onOpenFileClick = () => {
     var x = document.getElementById("file-opener")
     x?.click()
@@ -79,6 +93,12 @@ export default function MainDrawer() {
           <img src={logoUrl}/>
         </ListItem>
       </List> */}
+      {/* <Card sx={{width: '60vw', height: '96vh'}}>
+					<CardContent>
+						<img src={imgUrl}/>
+					</CardContent>
+			</Card> */}
+      <ImageViewer filename={filename} content={cont} /> 
       <List sx={{height: '100vh'}}>
         <ListItemButton  onClick={handleOpenGeneralConfig}>
           <ListItemIcon>
