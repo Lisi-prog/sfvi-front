@@ -1,15 +1,15 @@
-import { Box, Button, Card, CardContent, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import AuxiliarDrawer from '../components/AuxiliarDrawer';
+import InputSelectProgram from '../components/InputSelectProgram';
 import { MenuInferior } from '../components/MenuInferior';
 const buttonStyle = {
-	width: '20vw', 
+	width: '100%', 
 	height: '4vh', 
 	mb: 1,	
-	ml:2.5
 }
 const selectorStyle = {
-	minWidth: '20vw', 
+	width: '100%', 
 	mb: 1,
 	ml:2.5
 }
@@ -25,18 +25,27 @@ const ModalStyle = {
   boxShadow: 24,
   p: 4,
 };
-
+const inputImageRoute = 'image-opener'
 export const ImageRouteSelector = () => {
+	const [pathSeleccionado, setPathSeleccionado] = useState('');
 
+	const onOpenFileClick = () => {
+		var x = document.getElementById(inputImageRoute);
+    x?.click()
+  };
+	const dameImagePath = (filePath: string) => {
+    console.log(`Ruta desde el padre: ${filePath}`)
+		setPathSeleccionado(filePath)
+  }
 
 return (
 	<Box>
 		{/* <AuxiliarDrawer></AuxiliarDrawer> */}
-		<Card sx={{width:'25vw'}}>
-			<CardContent sx={{justifyContent:'center', alignContent:'center'}}>
-				<Typography variant="h5" component="div" mb={1}>
-				Image Route Selector
-				</Typography>
+		<Card sx={{width:'35vw'}}>
+			<CardContent>
+				<Button variant="contained" onClick={onOpenFileClick} style={buttonStyle}>Select image</Button>
+				<InputSelectProgram id={inputImageRoute} getFilePath={dameImagePath}/>
+				<TextField value={pathSeleccionado} disabled style={selectorStyle}></TextField>
 			</CardContent>
 		</Card>
 	</Box>

@@ -13,7 +13,7 @@ import { ImageRouteSelector } from "../views/ImageRouteSelector";
 const mensaje = {
   codigo: 'dameimagen'
 }
-
+const inputFileRoute = 'file-opener'
 declare global {
   interface Window {
     showOpenFilePicker: any;
@@ -88,7 +88,7 @@ export default function MainDrawer() {
   const [cont, setCont] = React.useState<number[]>([]);
 
   const onOpenFileClick = () => {
-    var x = document.getElementById("file-opener")
+    var x = document.getElementById(inputFileRoute)
     x?.click()
     sendMessage('Tocamos el boton Select Program')
   };
@@ -203,7 +203,7 @@ export default function MainDrawer() {
           </ListItemIcon>
           <ListItemText primary="Select Program" />
         </ListItemButton>
-          <InputSelectProgram getFilePath={dameFilePath}/>
+          <InputSelectProgram id={inputFileRoute} getFilePath={dameFilePath}/>
         <Divider></Divider> 
         <ListItemButton  href='/Counters'>
           <ListItemIcon>
