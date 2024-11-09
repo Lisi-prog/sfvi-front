@@ -86,7 +86,7 @@ export default function MainDrawer() {
   const [imgUrl, setImgUrl] = React.useState<string>('');
   const [filename, setFilename] = React.useState<string>('');
   const [cont, setCont] = React.useState<number[]>([]);
-
+  
   const onOpenFileClick = () => {
     var x = document.getElementById(inputFileRoute)
     x?.click()
@@ -94,6 +94,21 @@ export default function MainDrawer() {
   };
   const dameFilePath = (filePath: string) => {
     console.log(`Ruta desde el padre: ${filePath}`)
+  }
+
+  const dameImagePath = (filePath: string) => {
+    console.log(`Ruta desde el padre: ${filePath}`)
+    
+    setImgUrl(filePath)
+    //sendMessage(JSON.stringify(mensajeJson))
+  }
+
+  const enviarImagePath = (imgUrl: string) => {
+    var mensajeJson = {
+      "codigo": "toma_ruta_imagen",
+      "ruta": imgUrl
+    }
+    sendMessage(JSON.stringify(mensajeJson))
   }
 
   const DrawerList = (
@@ -137,7 +152,7 @@ export default function MainDrawer() {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleCloseGeneralConfig} variant="contained" color="error">Cancel</Button>
-            <Button type="submit" variant="contained" >Accept</Button>
+            <Button type="submit" variant="contained">Accept</Button>
           </DialogActions>
         </Dialog>
         <Dialog
@@ -157,11 +172,11 @@ export default function MainDrawer() {
         >
           {/* <DialogTitle>General Configuration</DialogTitle> */}
           <DialogContent>
-            <ImageRouteSelector/>
+            <ImageRouteSelector getFilePath={dameImagePath}/>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleCloseImageRouteSelector} variant="contained" color="error">Cancel</Button>
-            <Button type="submit" variant="contained" >Accept</Button>
+            <Button type="submit" variant="contained" onClick={() => enviarImagePath(imgUrl)}>Accept</Button> {/* Aqui se debe enviar la ruta de la imagen */}
           </DialogActions>
         </Dialog>
         <Divider></Divider>

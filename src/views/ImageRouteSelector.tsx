@@ -26,7 +26,11 @@ const ModalStyle = {
   p: 4,
 };
 const inputImageRoute = 'image-opener'
-export const ImageRouteSelector = () => {
+
+export interface ImageRouteSelector {
+  getFilePath: (filePath: string) => void;
+}
+export const ImageRouteSelector: React.FC<ImageRouteSelector> = (props) => {
 	const [pathSeleccionado, setPathSeleccionado] = useState('');
 
 	const onOpenFileClick = () => {
@@ -36,6 +40,7 @@ export const ImageRouteSelector = () => {
 	const dameImagePath = (filePath: string) => {
     console.log(`Ruta desde el padre: ${filePath}`)
 		setPathSeleccionado(filePath)
+		props.getFilePath(filePath)
   }
 
 return (
