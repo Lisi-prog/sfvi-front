@@ -10,6 +10,7 @@ import EventStream from '../components/Test';
 import useWebSocket from 'react-use-websocket';
 import { parsearJson } from '../utils/common-util/general-functions';
 import ImageViewer from '../components/ImageViewer';
+import { useLastMessageContext, useSendMessageContext } from '../providers/WebSocketProvider';
 
 const textFieldStyle = {
 	marginBottom: 1,
@@ -28,13 +29,15 @@ const [acordionExpandido, setAcordionExpandido] = React.useState<string | false>
 const [imgUrl, setImgUrl] = React.useState<string>('');
 const [urlSolicitada, setUrlSolicitada] = React.useState("");
 
-const [socketUrl, setSocketUrl] = useState(`${import.meta.env.VITE_URL_WEBSOCKET}:${import.meta.env.VITE_PUERTO_WEBSOCKET}`);
-const { sendMessage, lastMessage, readyState, getWebSocket} = useWebSocket(socketUrl);
+// const [socketUrl, setSocketUrl] = useState(`${import.meta.env.VITE_URL_WEBSOCKET}:${import.meta.env.VITE_PUERTO_WEBSOCKET}`);
+// const { sendMessage, lastMessage, readyState, getWebSocket} = useWebSocket(socketUrl);
+const lastMessage = useLastMessageContext()
+const sendMessage = useSendMessageContext()
+
 const [filename, setFilename] = React.useState<string>('');
 const [cont, setCont] = React.useState<number[]>([]);
 	useEffect(() => {
 		sendMessage('ping')
-		
 	}, [])
 
 	useEffect(() => {

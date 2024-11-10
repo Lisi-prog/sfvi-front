@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 export interface FilePath {
   getFilePath: (filePath: string) => void;
   id: string;
+  extensions?: string;
 }import axios, {isCancel, AxiosError, AxiosResponse} from 'axios';
 
 const FileInput: React.FC<FilePath> = (props) => {
@@ -35,7 +36,7 @@ const FileInput: React.FC<FilePath> = (props) => {
     }
   };
 
-  return <input id={props.id} type="file" onChange={handleFileChange} style={{ display: 'none' }} />;
+  return <input id={props.id} type="file" onChange={handleFileChange} style={{ display: 'none' }} accept={props.extensions}/>;
 };
 
 export default FileInput;

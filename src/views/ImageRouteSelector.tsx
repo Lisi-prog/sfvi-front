@@ -26,7 +26,7 @@ const ModalStyle = {
   p: 4,
 };
 const inputImageRoute = 'image-opener'
-
+const imageExtensions = 'png,jpg,jpeg'
 export interface ImageRouteSelector {
   getFilePath: (filePath: string) => void;
 }
@@ -49,7 +49,7 @@ return (
 		<Card sx={{width:'35vw'}}>
 			<CardContent>
 				<Button variant="contained" onClick={onOpenFileClick} style={buttonStyle}>Select image</Button>
-				<InputSelectProgram id={inputImageRoute} getFilePath={dameImagePath}/>
+				<InputSelectProgram id={inputImageRoute} getFilePath={dameImagePath} extensions={imageExtensions}/>
 				<TextField value={pathSeleccionado} disabled style={selectorStyle}></TextField>
 			</CardContent>
 		</Card>

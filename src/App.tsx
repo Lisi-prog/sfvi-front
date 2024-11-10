@@ -10,6 +10,7 @@ import { ProgrammingInterface } from './views/ProgrammingInterface';
 import { Counters } from './views/Counters';
 import { MonitorMain } from './views/MonitorMain';
 import { ClasicProgram } from './views/ClasicProgram';
+import { WebSocketProvider } from './providers/WebSocketProvider';
 function App() {
   console.log(window.ipcRenderer);
   const [isSent, setSent] = useState(false);
@@ -28,6 +29,7 @@ function App() {
   }, [fromMain, isSent]);
 
   return (
+    
     <div className="flex flex-col">
       {window.Main && (
         <div className="flex-none">
@@ -35,10 +37,12 @@ function App() {
           <Layout></Layout>
         </div>
       )}
+      
+      <WebSocketProvider>
       <Box sx={{width: '84vw', alignSelf: 'flex-end', mr:1}}>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<MonitorMain imgUrl='fetch'/>} />
+            <Route path='/' element={<MonitorMain/>} />
               <Route path='/GeneralConfiguration' element={<GeneralConfiguration/>} />
               <Route path='/CameraConfiguration' element={<CameraConfiguration />} />
               <Route path='/SelectProgram' element={<SelectProgram />} />
@@ -48,7 +52,9 @@ function App() {
           </Routes>
         </BrowserRouter>
       </Box>
+      </WebSocketProvider>
     </div>
+    
   );
 }
 

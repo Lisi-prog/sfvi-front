@@ -10,6 +10,7 @@ import useWebSocket, { ReadyState } from 'react-use-websocket';
 import ImageViewer from './ImageViewer';
 import { parsearJson } from '../utils/common-util/general-functions';
 import { ImageRouteSelector } from "../views/ImageRouteSelector";
+import { useLastMessageContext, useSendMessageContext } from "../providers/WebSocketProvider";
 const mensaje = {
   codigo: 'dameimagen'
 }
@@ -38,6 +39,7 @@ const ListItemButtonStyle = {
   pl: 2
 }
 
+const programExtensions = "json"
 async function abrirSelectorDeArchivos() {
   // const [fileHandle] = await window.showOpenFilePicker({startIn:'documents'});
   // const file = await fileHandle.getFile();
@@ -47,8 +49,10 @@ async function abrirSelectorDeArchivos() {
 
 
 export default function MainDrawer() {
-  const [socketUrl, setSocketUrl] = useState(`${import.meta.env.VITE_URL_WEBSOCKET}:${import.meta.env.VITE_PUERTO_WEBSOCKET}`);
-  const { sendMessage, lastMessage, readyState, getWebSocket} = useWebSocket(socketUrl);
+  // const [socketUrl, setSocketUrl] = useState(`${import.meta.env.VITE_URL_WEBSOCKET}:${import.meta.env.VITE_PUERTO_WEBSOCKET}`);
+  // const { sendMessage, lastMessage, readyState, getWebSocket} = useWebSocket(socketUrl);
+  const lastMessage = useLastMessageContext()
+  const sendMessage = useSendMessageContext()
   const [openGeneralConfig, setOpenGeneralConfig] = React.useState(false);
   const handleOpenGeneralConfig = () => setOpenGeneralConfig(true);
 
@@ -218,7 +222,7 @@ export default function MainDrawer() {
           </ListItemIcon>
           <ListItemText primary="Select Program" />
         </ListItemButton>
-          <InputSelectProgram id={inputFileRoute} getFilePath={dameFilePath}/>
+          <InputSelectProgram id={inputFileRoute} getFilePath={dameFilePath} extensions={programExtensions}/>
         <Divider></Divider> 
         <ListItemButton  href='/Counters'>
           <ListItemIcon>
