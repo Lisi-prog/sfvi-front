@@ -1,7 +1,8 @@
 import { Box, Button, Collapse, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { AvTimer, MonitorHeart, PhotoCamera, RestartAlt, Settings, Tv } from "@mui/icons-material";
 import logoUrl from '../assets/zero-logo.png'
+import { useLastMessageContext, useSendMessageContext } from "../providers/WebSocketProvider";
 
 const subMenuStyle = {
   backgroundColor: "#22ABBD",
@@ -22,9 +23,16 @@ const ListItemButtonStyle = {
 }
 
 export default function ProgrammingDrawer() {
+  const lastMessage = useLastMessageContext()
+  const sendMessage = useSendMessageContext()
   const [openArmado, setOpenArmado] = React.useState(false);
   const [openMecanica, setOpenMecanica] = React.useState(false);
   const [openInyeccion, setOpenInyeccion] = React.useState(false);
+
+  useEffect(() => {
+    sendMessage('Cargo el Programming Drawer')
+  }, [])
+  
 
   const DrawerList = (
     <Box sx={{width:'15vw'}} role="presentation">

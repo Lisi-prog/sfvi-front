@@ -27,8 +27,7 @@ const dataExample = {
 export const MonitorMain = () => {
 const [acordionExpandido, setAcordionExpandido] = React.useState<string | false>('mainConfig');
 const [imgUrl, setImgUrl] = React.useState<string>('');
-const [urlSolicitada, setUrlSolicitada] = React.useState("");
-
+const [inputTest, setInputTest] = React.useState("test_ruta");
 // const [socketUrl, setSocketUrl] = useState(`${import.meta.env.VITE_URL_WEBSOCKET}:${import.meta.env.VITE_PUERTO_WEBSOCKET}`);
 // const { sendMessage, lastMessage, readyState, getWebSocket} = useWebSocket(socketUrl);
 const lastMessage = useLastMessageContext()
@@ -37,7 +36,7 @@ const sendMessage = useSendMessageContext()
 const [filename, setFilename] = React.useState<string>('');
 const [cont, setCont] = React.useState<number[]>([]);
 	useEffect(() => {
-		sendMessage('ping')
+		sendMessage('Estoy en el main')
 	}, [])
 
 	useEffect(() => {
@@ -50,17 +49,9 @@ const [cont, setCont] = React.useState<number[]>([]);
 	}, [lastMessage])
 	
 
-	// function test(){
-	// 	axios.post<Blob>(`${import.meta.env.VITE_HTTP_URL}:${import.meta.env.VITE_HTTP_PORT}/test`, dataExample, { responseType: 'blob' })
-	// 		.then((response: AxiosResponse<Blob>) => {
-	// 			const url = URL.createObjectURL(response.data);
-	// 			console.log(response)
-	// 			setImgUrl(url);
-	// 		})
-	// 		.catch(error => {
-	// 			console.error('Error al cargar la imagen:', error);
-	// 		});
-	// }
+	const sendMensajeTest = (mensaje: string) => {
+		sendMessage(mensaje)
+	}
 
 return (
 	<Box>
@@ -91,11 +82,11 @@ return (
 									<TextField value={""} id="outlined-basic" label="Status" variant="outlined" fullWidth size='small' disabled sx={textFieldStyle}/>
 									<TextField value={""} id="outlined-basic" label="Pictures Taken" variant="outlined" fullWidth size='small' disabled sx={textFieldStyle}/>
 									<TextField value={""} id="outlined-basic" label="NOK Pictures" variant="outlined" fullWidth size='small' disabled sx={textFieldStyle}/>
-									<Button variant='contained' fullWidth>
+									<Button variant='contained' onClick={() =>sendMensajeTest(inputTest)} fullWidth>
 										Test Trigger
 									</Button>
 
-									<TextField value={urlSolicitada} id="outlined-basic" label="URL" variant="outlined" fullWidth size='small' sx={textFieldStyle} onChange={(event) => setUrlSolicitada(event.target.value)}/>
+									<TextField value={inputTest} id="outlined-basic" label="URL" variant="outlined" fullWidth size='small' sx={textFieldStyle} onChange={(event) => setInputTest(event.target.value)}/>
 									{/* <Button variant='contained' fullWidth onClick={test}>TEST IMAGE</Button> */}
 					</CardContent>
 				</Card>

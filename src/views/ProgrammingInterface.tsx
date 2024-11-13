@@ -6,6 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import Editor from "@monaco-editor/react";
 import ProgrammingDrawer from '../components/ProgrammingDrawer';
+import { useLastMessageContext, useSendMessageContext } from '../providers/WebSocketProvider';
 
 function generate(element: React.ReactElement<any>) {
 
@@ -17,15 +18,21 @@ function generate(element: React.ReactElement<any>) {
 }
 
 export const ProgrammingInterface = () => {
-const [dense, setDense] = React.useState(false);
-const [secondary, setSecondary] = React.useState(false);
-const [editAction, setEditAction] = React.useState(false);
-const [codeValue, setCodeValue] = React.useState("{\n\n}");
+	const lastMessage = useLastMessageContext()
+	const sendMessage = useSendMessageContext()
+	const [dense, setDense] = React.useState(false);
+	const [secondary, setSecondary] = React.useState(false);
+	const [editAction, setEditAction] = React.useState(false);
+	const [codeValue, setCodeValue] = React.useState("{\n\n}");
 
 const onCodeChange = React.useCallback((val, viewUpdate) => {
 	console.log('val:', val);
 	setCodeValue(val);
 }, []);
+
+useEffect(() => {
+	sendMessage('Estoy en Programming Interface')
+}, [])
 
 return (
 	<Box>

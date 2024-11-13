@@ -54,21 +54,29 @@ export default function MainDrawer() {
   const lastMessage = useLastMessageContext()
   const sendMessage = useSendMessageContext()
   const [openGeneralConfig, setOpenGeneralConfig] = React.useState(false);
-  const handleOpenGeneralConfig = () => setOpenGeneralConfig(true);
+
+  const handleOpenGeneralConfig = () => {
+    setOpenGeneralConfig(true);
+    sendMessage('Toco el boton General Configuration')
+  }
 
   const handleCloseGeneralConfig = () => {
     setOpenGeneralConfig(false);
   }
   
   const [openCameraConfig, setOpenCameraConfig] = React.useState(false);
-  const handleOpenCameraConfig = () => setOpenCameraConfig(true);
+  const handleOpenCameraConfig = () => {
+    setOpenCameraConfig(true);
+    sendMessage('Toco el boton Camera Configuration')
+  }
   const handleCloseCameraConfig = () => setOpenCameraConfig(false);
   
   const [openImageRouteSelector, setOpenImageRouteSelector] = React.useState(false)
   const handleOpenImageRouteSelector = () => setOpenImageRouteSelector(true);
   const handleCloseImageRouteSelector = () => setOpenImageRouteSelector(false);
+  
   useEffect(() => {
-    sendMessage('ruta')
+    sendMessage('Cargo el main Drawer')
   }, [])
 
   useEffect(() => {
@@ -98,6 +106,7 @@ export default function MainDrawer() {
   };
   const dameFilePath = (filePath: string) => {
     console.log(`Ruta desde el padre: ${filePath}`)
+    sendMessage(JSON.stringify({codigo: 'toma_ruta_programa', ruta: filePath}))
   }
 
   const dameImagePath = (filePath: string) => {
